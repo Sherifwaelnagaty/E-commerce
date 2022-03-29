@@ -131,19 +131,21 @@
                   Our <span>products</span>
                </h2>
             </div>
-            <div class="row">
-               <div class="col-sm-6 col-md-4 col-lg-3">
-                  <div class="box">
-                     <div class="option_container">
-                        <div class="options">
-                           <a href="" class="option1">
-                           Men's Shirt
-                           </a>
-                           <a href="" class="option2">
-                           Buy Now
-                           </a>
-                        </div>
-                     </div>
+            <?php while($row=mysqli_fetch_array($result)){
+            echo '<div class="row">';
+            echo '<div class="col-sm-6 col-md-4 col-lg-3">';
+            echo '<div class="box">';
+            echo '<div class="option_container">';
+            echo '<div class="options">';
+            echo '<a href="" class="option1">';
+                   $row['ProductName'];        
+            echo '</a>';
+            echo '<a href="" class="option2">';
+            echo 'Buy Now';
+            echo '</a>';
+            echo '</div>';
+            echo '</div>';
+                  }?>
       <!-- jQery -->
       <script src="js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->
