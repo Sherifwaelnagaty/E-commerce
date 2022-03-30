@@ -9,7 +9,12 @@ class Pages extends Controller
         $indexView = new Index($this->getModel(), $this);
         $indexView->output();
     }
-
+    public function Products(){
+        $viewPath = VIEWS_PATH . 'pages/Products.php';
+        require_once $viewPath;
+        $productView = new Products($this->getModel(), $this);
+        $productView->output();
+    }
     public function about()
     {
         $viewPath = VIEWS_PATH . 'pages/About.php';
