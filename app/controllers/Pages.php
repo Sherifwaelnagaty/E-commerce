@@ -15,6 +15,12 @@ class Pages extends Controller
         $productView = new Products($this->getModel(), $this);
         $productView->output();
     }
+    public function Account(){
+        $viewPath = VIEWS_PATH . 'pages/Account.php';
+        require_once $viewPath;
+        $AccountView = new Account($this->getModel(), $this);
+        $AccountView->output();
+    }
     public function about()
     {
         $viewPath = VIEWS_PATH . 'pages/About.php';
