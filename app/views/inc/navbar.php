@@ -11,6 +11,15 @@
                         <li class="nav-item active">
                            <a class="nav-link" href="<?php echo URLROOT . 'public'; ?>">Home </a>
                         </li>
+                        <?php if (isset($_SESSION['user_id'])) : ?>
+                        <li class="nav-item">
+                           <a class="nav-link" href="<?php echo URLROOT . 'pages/Products'; ?>">My account</a>
+                        </li>
+                        <?php else : ?>
+                        <li class="nav-item">
+                           <a class="nav-link" href="<?php echo URLROOT . 'users/login'; ?>">Login</a>
+                        </li>
+                        <?php endif; ?>     
                         <li class="nav-item">
                            <a class="nav-link" href="product.html">Products</a>
                         </li>
