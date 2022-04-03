@@ -6,19 +6,27 @@ class Users extends Controller
         $registerModel = $this->getModel();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
-            $registerModel->setName(trim($_POST['name']));
+            $registerModel->setFirstName(trim($_POST['firstname']));
+            $registerModel->setLastName(trim($_POST['lastname']));
             $registerModel->setEmail(trim($_POST['email']));
+            $registerModel->setAddress(trim($_POST['address']));
             $registerModel->setPassword(trim($_POST['password']));
             $registerModel->setConfirmPassword(trim($_POST['confirm_password']));
 
             //validation
-            if (empty($registerModel->getName())) {
-                $registerModel->setNameErr('Please enter a name');
+            if (empty($registerModel->getFirstName())) {
+                $registerModel->setFirstNameErr('Please enter a name');
+            }
+            if (empty($registerModel->getLastName())) {
+                $registerModel->setLastNameErr('Please enter a name');
             }
             if (empty($registerModel->getEmail())) {
                 $registerModel->setEmailErr('Please enter an email');
             } elseif ($registerModel->emailExist($_POST['email'])) {
                 $registerModel->setEmailErr('Email is already registered');
+            }
+            if (empty($registerModel->getAddress())) {
+                $registerModel->setAddressErr('Please enter an address');
             }
             if (empty($registerModel->getPassword())) {
                 $registerModel->setPasswordErr('Please enter a password');
@@ -33,6 +41,7 @@ class Users extends Controller
             if (
                 empty($registerModel->getNameErr()) &&
                 empty($registerModel->getEmailErr()) &&
+                empty($registerModel->getAddressErr()) &&
                 empty($registerModel->getPasswordErr()) &&
                 empty($registerModel->getConfirmPasswordErr())
             ) {
