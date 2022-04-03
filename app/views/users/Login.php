@@ -3,22 +3,8 @@ class Login extends view
 {
   public function output()
   {
-    $title = $this->model->title;
-
     require APPROOT . '/views/inc/header.php';
     flash('register_success');
-    $text = <<<EOT
-    <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4"> $title</h1>
-    </div>
-  </div>
-
-  </div>
-  </div>
-  </div>
-EOT;
-    echo $text;
     $this->printForm();
     require APPROOT . '/views/inc/footer.php';
   }
@@ -39,22 +25,16 @@ EOT;
     echo $text;
     $this->printEmail();
     $this->printPassword();
-
     $text = <<<EOT
     <div class="container">
     <div class="checkbox mb-3 mt-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
+    <a href="$registerUrl">Create a new account?</a>
       </div>
       <div class="row mt-4">
         <div class="col">
           <input type="submit" value="Login" class="form-control btn btn-lg btn-primary btn-block">
         </div>
-        <div class="col">
-          <a href="$registerUrl" class="form-control btn btn-lg btn-block">New User, Sign up</a>
         </div>
-      </div>
       </div>
     </form>
     </div>
