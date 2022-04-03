@@ -21,12 +21,12 @@ class Pages extends Controller
         $AccountView = new Account($this->getModel(), $this);
         $AccountView->output();
     }
-    public function about()
+    public function AddProducts()
     {
-        $viewPath = VIEWS_PATH . 'pages/About.php';
+        $viewPath = VIEWS_PATH . 'pages/AddProducts.php';
         require_once $viewPath;
-        $aboutView = new About($this->getModel(), $this);
-        $aboutView->output();
+        $AddProductsView = new AddProducts($this->getModel(), $this);
+        $AddProductsView->output();
     }
 
 }
