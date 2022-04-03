@@ -3,13 +3,7 @@ class cart extends View
 {
   public function output()
   {
-    $title = $this->model->title;
-    $subtitle = $this->model->subtitle;
-    if(isset($_SESSION['user_id'])){
-    $user_name = $_SESSION['user_name'];
-    $Add=$_SESSION[''];
-    }
-        require APPROOT . '/views/inc/header.php';
+    require APPROOT . '/views/inc/header.php';
     $text=' <main>
 <!-- <div class="col-lg-11 ">
 <aside>
