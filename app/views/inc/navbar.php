@@ -8,26 +8,34 @@
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="navbar-nav">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                            <a class="nav-link" href="<?php echo URLROOT . 'public'; ?>">Home </a>
                         </li>
-                        <?php if (isset($_SESSION['user_id'])) : ?>
+                        <?php if (isset($_SESSION['userID'])) : ?>
                         <li class="nav-item">
                            <a class="nav-link" href="<?php echo URLROOT . 'pages/Account'; ?>">My account</a>
                         </li>
                         <?php else : ?>
                         <li class="nav-item">
-                           <a class="nav-link" href="<?php echo URLROOT . 'users/Register'; ?>">Register</a>
+                           <a class="nav-link" href="<?php echo URLROOT . 'users/Login'; ?>">Login</a>
                         </li>
+                        <?php endif; ?>
                         <li class="nav-item">
-                           <a class="nav-link" href="<?php echo URLROOT . 'users/login'; ?>">Login</a>
+                           <a class="nav-link" href="<?php echo URLROOT . 'pages/AddProducts'; ?>">Products</a>
                         </li>
-                        <?php endif; ?>     
+                        <?php if(isset($_SESSION["Type"])){
+                           if ($_SESSION["Type"]=="Admin") : ?>
                         <li class="nav-item">
-                           <a class="nav-link" href="product.html">Products</a>
+                           <a class="nav-link" href="<?php echo URLROOT . 'pages/AddProducts'; ?>">Add Products</a>
                         </li>
+                        <?php endif; }?>
                         <li class="nav-item">
-                           <a class="nav-link" href="<?php echo URLROOT . 'pages/contact'; ?>">Contact</a>
+                           <a class="nav-link" href="#">
+                              <button type="button" class="btn">
+                              <span class="bi-instagram">
+                              </span>   
+                              </button>                           
+                           </a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="#">
@@ -84,13 +92,7 @@
                                  </g>
                               </svg>
                            </a>
-                        </li>
-                        <form class="form-inline">
-                           <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                           <i class="fa fa-search" aria-hidden="true"></i>
-                           </button>
-                        </form>
-                     </ul>
+                        </ul>
                   </div>
                </nav>
             </div>
