@@ -35,8 +35,10 @@ EOT;
     <form action="$action" method="post">
 EOT;
     echo $text;
-    $this->printName();
+    $this->printFirstName();
+    $this->printLastName();
     $this->printEmail();
+    $this->printAddress();
     $this->printPassword();
     $this->printConfirmPassword();
     $text = <<<EOT
@@ -58,14 +60,24 @@ EOT;
     echo $text;
   }
 
-  private function printName()
+  private function printFirstName()
   {
-    $val = $this->model->getName();
-    $err = $this->model->getNameErr();
+    $val = $this->model->getFirstName();
+    $err = $this->model->getFirstNameErr();
     $valid = (!empty($err) ? 'is-invalid' : '');
 
-    $this->printInput('text', 'name', $val, $err, $valid);
+    $this->printInput('text', 'firstname', $val, $err, $valid);
   }
+
+  private function printLastName()
+  {
+    $val = $this->model->getLastName();
+    $err = $this->model->getLastNameErr();
+    $valid = (!empty($err) ? 'is-invalid' : '');
+
+    $this->printInput('text', 'lastname', $val, $err, $valid);
+  }
+
   private function printEmail()
   {
     $val = $this->model->getEmail();
@@ -73,6 +85,15 @@ EOT;
     $valid = (!empty($err) ? 'is-invalid' : '');
 
     $this->printInput('email', 'email', $val, $err, $valid);
+  }
+
+  private function printAddress()
+  {
+    $val = $this->model->getAddress();
+    $err = $this->model->getAddressErr();
+    $valid = (!empty($err) ? 'is-invalid' : '');
+
+    $this->printInput('text', 'address', $val, $err, $valid);
   }
 
   private function printPassword()
