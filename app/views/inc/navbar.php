@@ -17,6 +17,9 @@
                         </li>
                         <?php else : ?>
                         <li class="nav-item">
+                           <a class="nav-link" href="<?php echo URLROOT . 'users/Register'; ?>">Register</a>
+                        </li>
+                        <li class="nav-item">
                            <a class="nav-link" href="<?php echo URLROOT . 'users/login'; ?>">Login</a>
                         </li>
                         <?php endif; ?>     
