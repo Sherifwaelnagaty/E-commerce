@@ -21,7 +21,7 @@
                         </li>
                         <?php endif; ?>
                         <li class="nav-item">
-                           <a class="nav-link" href="<?php echo URLROOT . 'pages/AddProducts'; ?>">Products</a>
+                           <a class="nav-link" href="<?php echo URLROOT . 'pages/Products'; ?>">Products</a>
                         </li>
                         <?php if(isset($_SESSION["Type"])){
                            if ($_SESSION["Type"]=="Admin") : ?>
