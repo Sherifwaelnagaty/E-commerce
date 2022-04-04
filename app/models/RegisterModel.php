@@ -5,16 +5,22 @@ class RegisterModel extends UserModel
     public  $title = 'Register';
     protected $firstName;
     protected $firstNameErr;
+
     protected $lastName;
     protected $lastNameErr;
+
     protected $address;
     protected $addressErr;
+
     protected $moblieNum;
     protected $mobileNumErr;
+
     protected $birthdate;
     protected $birthdateErr;
+
     protected $gender;
     protected $genderErr;
+
     protected $confirmPassword;
     protected $confirmPasswordErr;
 
@@ -37,7 +43,7 @@ class RegisterModel extends UserModel
         $this->birthdate = "";
         $this->birthdateErr = "";
 
-        #$this->gender = male;
+        $this->gender = "";
 
         $this->confirmPassword = "";
         $this->confirmPasswordErr = "";
@@ -83,6 +89,46 @@ class RegisterModel extends UserModel
         $this->lastNameErr = $lastNameErr;
     }
 
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    public function getGenderErr()
+    {
+        return $this->genderErr;
+    }
+
+    public function setGenderErr($genderErr)
+    {
+        $this->genderErr = $genderErr;
+    }
+
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+    }
+
+    public function getBirthdateErr()
+    {
+        return $this->birthdateErr;
+    }
+
+    public function setBirthdateErr($birthdateErr)
+    {
+        $this->birthdateErr = $birthdateErr;
+    }
+
     public function getAddress()
     {
         return $this->address;
@@ -103,6 +149,25 @@ class RegisterModel extends UserModel
         $this->addressErr = $addressErr;
     }
 
+    public function getMobileNum()
+    {
+        return $this->mobileNum;
+    }
+
+    public function setMobileNum($mobileNum)
+    {
+        $this->mobileNum = $mobileNum;
+    }
+
+    public function getMobileNumErr()
+    {
+        return $this->mobileNumErr;
+    }
+
+    public function setMobileNumErr($mobileNumErr)
+    {
+        $this->mobileNumErr = $mobileNumErr;
+    }
 
     public function getConfirmPassword()
     {
@@ -124,11 +189,13 @@ class RegisterModel extends UserModel
 
     public function signup()
     {
-        $this->dbh->query("INSERT INTO users (`name`, `email`, `address` `password`) VALUES(:uname, :email, :address, :pass)");
-        $this->dbh->bind(':uname', $this->name);
+        $this->dbh->query("INSERT INTO users (`firstname`, `lastname` , `email`, `address`, `mobilenum`, `password`) VALUES(:firstname, :email, :address, :mobilenum, :pass)");
+        $this->dbh->bind(':firstname', $this->firstName);
+        $this->dbh->bind(':lastname', $this->lastName);
         $this->dbh->bind(':email', $this->email);
         $this->dbh->bind(':address', $this->address);
         $this->dbh->bind(':pass', $this->password);
+        $this->dbh->bind(':profilepic', $this->profilePic);
 
         return $this->dbh->execute();
     }
