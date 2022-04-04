@@ -3,8 +3,6 @@ class Register extends view
 {
   public function output()
   {
-    $title = $this->model->title;
-
     require APPROOT . '/views/inc/header.php';
     $text = <<<EOT
     <div class="jumbotron jumbotron-fluid">
