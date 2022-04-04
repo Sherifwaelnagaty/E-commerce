@@ -8,8 +8,11 @@ class Users extends Controller
             // Process form
             $registerModel->setFirstName(trim($_POST['firstname']));
             $registerModel->setLastName(trim($_POST['lastname']));
+            $registerModel->setGender(trim($_POST['gender']));
+            $registerModel->setBirthdate(trim($_POST['birthdate']));
             $registerModel->setEmail(trim($_POST['email']));
             $registerModel->setAddress(trim($_POST['address']));
+            $registerModel->setMobileNum(trim($_POST['mobilenum']));
             $registerModel->setPassword(trim($_POST['password']));
             $registerModel->setConfirmPassword(trim($_POST['confirm_password']));
 
@@ -20,6 +23,9 @@ class Users extends Controller
             if (empty($registerModel->getLastName())) {
                 $registerModel->setLastNameErr('Please enter a name');
             }
+            if (empty($registerModel->getBirthdate())) {
+                $registerModel->setBirthdateErr('Please enter a birthdate');
+            }
             if (empty($registerModel->getEmail())) {
                 $registerModel->setEmailErr('Please enter an email');
             } elseif ($registerModel->emailExist($_POST['email'])) {
@@ -27,6 +33,11 @@ class Users extends Controller
             }
             if (empty($registerModel->getAddress())) {
                 $registerModel->setAddressErr('Please enter an address');
+            }
+            if (empty($registerModel->getMobileNum())) {
+                $registerModel->setMobileNumErr('Please enter an Mobile number');
+            } elseif (is_numeric($registerModel->getMobileNum()) == false){
+                $registerModel->setMobileNumErr('Mobile number must only contain numbers');
             }
             if (empty($registerModel->getPassword())) {
                 $registerModel->setPasswordErr('Please enter a password');
@@ -39,9 +50,12 @@ class Users extends Controller
             }
 
             if (
-                empty($registerModel->getNameErr()) &&
+                empty($registerModel->getFirstNameErr()) &&
+                empty($registerModel->getLastNameErr()) &&
+                empty($registerModel->getBirthdateErr()) &&
                 empty($registerModel->getEmailErr()) &&
                 empty($registerModel->getAddressErr()) &&
+                empty($registerModel->getMobileNumErr()) &&
                 empty($registerModel->getPasswordErr()) &&
                 empty($registerModel->getConfirmPasswordErr())
             ) {
