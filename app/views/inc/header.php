@@ -24,11 +24,8 @@
 <body>
   <?php require APPROOT . '/views/inc/navbar.php'; ?>
   <div class="container">
-   <!-- jQery -->
       <script src="<?php echo URLROOT; ?>js/jquery-3.4.1.min.js"></script>
-      <!-- popper js -->
       <script src="<?php echo URLROOT; ?>js/popper.min.js"></script>
-      <!-- bootstrap js -->
       <script src="<?php echo URLROOT; ?>js/bootstrap.js"></script>
-      <!-- custom js -->
       <script src="<?php echo URLROOT; ?>js/custom.js"></script>
+      <script src="<?php echo URLROOT; ?>js/main.js"></script>
