@@ -3,47 +3,54 @@ class Products extends View
 {
   public function output()
   {
-    $title = $this->model->title;
-    $subtitle = $this->model->subtitle;
-    if(isset($_SESSION['user_id'])){
-    $user_id = $_SESSION['user_id'];
-    $user_name = $_SESSION['user_name'];
-   }
     require APPROOT . '/views/inc/header.php';
-    $text = '
-     <!-- end header section -->
-      </div>
-      <section class="product_section layout_padding">
+    $style=URLROOT.'css/Products.css';
+    $text = <<<EOT
+         <link rel="stylesheet" href="$style">
+         <section class="product_section layout_padding">
          <div class="container">
             <div class="heading_container heading_center">
                <h2>
-                  Our <span>products</span>
+                  Our products
                </h2>
             </div> 
+            <section class="featured spad">
+        <div class="container">
             <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="box">
-            <div class="option_container">
-            <div class="options">
-                           <a href="" class="option2">
-                           Buy Now
-                           </a>
-                        </div>
+                <div class="col-lg-12">
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".oranges">Oranges</li>
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".fastfood">Fastfood</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            </div> 
-            <div class="img-box">
-                        <img src="images/p1.png" alt="">
-                     </div>
-                     <div class="detail-box">
-                        <h5>
-                          T-Shirt
-                        </h5>
-                        <h6>
-                           $75
-                        </h6>
-                     </div>
-                  </div>
-               </div>';
+            
+            <div class="row featured__filter">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+      </section>
+      EOT;
     echo $text;
     require APPROOT . '/views/inc/footer.php';
   }
