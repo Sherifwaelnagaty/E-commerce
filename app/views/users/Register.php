@@ -23,26 +23,19 @@ EOT;
     echo $text;
     $this->printFirstName();
     $this->printLastName();
-    $this->printGender();
-    $this->printBirthdate();
     $this->printEmail();
     $this->printAddress();
-    $this->printMoblieNum();
+    $this->printMobileNum();
     $this->printPassword();
     $this->printConfirmPassword();
+    $this->printBirthdate();
+    $this->printGender();
     $text = <<<EOT
     <div class="container">
       <div class="row mt-4">
         <div class="col">
           <input type="submit" value="Register" class="form-control btn btn-lg btn-primary btn-block">
         </div>
-        <div class="col">
-          <a href="$loginUrl" class="form-control btn btn-lg btn-block">Current user, login here</a>
-        </div>
-        <div class="col">
-        <a href="/mvc/app/views/pages/profilepic.php" class="form-control btn btn-lg btn-block">Click here to add a profile picture</a>
-      </div>
-      </div>
       </div>
     </form>
     </div>
@@ -57,7 +50,6 @@ EOT;
     $val = $this->model->getFirstName();
     $err = $this->model->getFirstNameErr();
     $valid = (!empty($err) ? 'is-invalid' : '');
-
     $this->printInput('text', 'firstname', $val, $err, $valid);
   }
 
@@ -66,7 +58,6 @@ EOT;
     $val = $this->model->getLastName();
     $err = $this->model->getLastNameErr();
     $valid = (!empty($err) ? 'is-invalid' : '');
-
     $this->printInput('text', 'lastname', $val, $err, $valid);
   }
 
@@ -88,15 +79,14 @@ EOT;
     $this->printInput('text', 'address', $val, $err, $valid);
   }
 
-  private function printMoblieNum()
+  private function printMobiLeNum()
   {
     $val = $this->model->getMobileNum();
-    $err = $this->model->getMobileNum();
+    $err = $this->model->getMobileNumErr();
     $valid = (!empty($err) ? 'is-invalid' : '');
 
-    $this->printInput('text', 'mobile number', $val, $err, $valid);
+    $this->printInput('text', 'mobile_number', $val, $err, $valid);
   }
-
   private function printPassword()
   {
     $val = $this->model->getPassword();
@@ -105,7 +95,6 @@ EOT;
 
     $this->printInput('password', 'password', $val, $err, $valid);
   }
-
   private function printConfirmPassword()
   {
     $val = $this->model->getConfirmPassword();
@@ -121,7 +110,7 @@ EOT;
     $err = $this->model->getGenderErr();
     $valid = (!empty($err) ? 'is-invalid' : '');
 
-    $this->printGenderInput( $err, $valid); 
+    $this->printGenderInput('gender', 'gender',$val,$err,$valid); 
   }
 
   private function printBirthdate()
@@ -130,9 +119,24 @@ EOT;
     $err = $this->model->getBirthdateErr();
     $valid = (!empty($err) ? 'is-invalid' : '');
 
-    $this->printInput('date', 'birthdate', $val, $err, $valid);
+    $this->printInput('date', 'birth_date', $val, $err, $valid);
   }
-
+  private function printGenderInput($type, $fieldName, $val, $err, $valid)
+  {
+      $label = str_replace("_", " ",$fieldName);
+      $label = ucwords($label);
+      $text = <<<EOT
+      <div class="form-group">
+      <label for="$fieldName"> $label: <sup>*</sup></label><br>
+      <select name=$type id="$fieldName" value="$val">
+              <option value="Gender">Select your gender</option>
+              <option value="Male">Male</option>   
+              <option value="Female">Female</option><br><br>
+      <span class="invalid-feedback">$err</span>
+      </div><br>
+      EOT;
+      echo $text;
+  }
   private function printInput($type, $fieldName, $val, $err, $valid)
   {
     $label = str_replace("_", " ", $fieldName);
@@ -143,22 +147,7 @@ EOT;
       <input type="$type" name="$fieldName" class="form-control form-control-lg $valid" id="$fieldName" value="$val">
       <span class="invalid-feedback">$err</span>
     </div>
-EOT;
-    echo $text;
-  }
-
-  private function printGenderInput( $err, $valid)
-  {
-    $gender = $this->model->getGender();
-    $fieldName = 'Gender';
-    $label = str_replace("_", " ", $fieldName);
-    $label = ucwords($label);
- $text = <<<EOT
-    <div class="col-lg-3">
-    <input type="radio" name="gender" value="male">Male:
-    <input type="radio" name="gender" value="female">Female:
-    </div>
-EOT;
+    EOT;
     echo $text;
   }
 }
