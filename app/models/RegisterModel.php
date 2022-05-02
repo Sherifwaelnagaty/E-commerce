@@ -2,7 +2,6 @@
 require_once 'UserModel.php';
 class RegisterModel extends UserModel
 {
-    public  $title = 'Register';
     protected $firstName;
     protected $firstNameErr;
 
@@ -12,7 +11,7 @@ class RegisterModel extends UserModel
     protected $address;
     protected $addressErr;
 
-    protected $moblieNum;
+    protected $mobileNum;
     protected $mobileNumErr;
 
     protected $birthdate;
@@ -44,6 +43,7 @@ class RegisterModel extends UserModel
         $this->birthdateErr = "";
 
         $this->gender = "";
+        $this->genderErr = "";
 
         $this->confirmPassword = "";
         $this->confirmPasswordErr = "";
@@ -186,17 +186,18 @@ class RegisterModel extends UserModel
     {
         $this->confirmPasswordErr = $confirmPasswordErr;
     }
-
     public function signup()
     {
-        $this->dbh->query("INSERT INTO users (`firstname`, `lastname` , `email`, `address`, `mobilenum`, `password`) VALUES(:firstname, :email, :address, :mobilenum, :pass)");
+        $this->dbh->query("INSERT INTO users (`FirstName`, `LastName` , `Address`, `Email`, `MobileNumber`, 
+            `Password`,`Birthdate`,`Type`) VALUES(:firstname, :lastname, :email, :address, :mobilenum, :pass, :birthdate, :type)");
         $this->dbh->bind(':firstname', $this->firstName);
         $this->dbh->bind(':lastname', $this->lastName);
         $this->dbh->bind(':email', $this->email);
         $this->dbh->bind(':address', $this->address);
+        $this->dbh->bind(':mobilenum', $this->mobileNum);
         $this->dbh->bind(':pass', $this->password);
-        $this->dbh->bind(':profilepic', $this->profilePic);
-
+        $this->dbh->bind(':birthdate', $this->birthdate);
+        $this->dbh->bind(':type', 'Customer');
         return $this->dbh->execute();
     }
 }
