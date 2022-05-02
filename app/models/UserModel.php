@@ -1,5 +1,5 @@
 <?php
-class UserModel extends model
+class UserModel extends Model
 {
     protected $email;
     protected $password;
