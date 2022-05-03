@@ -135,7 +135,12 @@ class Users extends Controller
     public function createUserSession($user)
     {
         $_SESSION['userID'] = $user->userID;
-        $_SESSION['user_name'] = $user->LastName;
+        $_SESSION['FirstName'] = $user->FirstName;
+        $_SESSION['LastName'] = $user->LastName;
+        $_SESSION['Address'] = $user->Address;
+        $_SESSION['Email'] = $user->Email;
+        $_SESSION['MobileNumber'] = $user->MobileNumber;
+        $_SESSION['Type']= $user->Type;
         //header('location: ' . URLROOT . 'pages');
         redirect('pages');
     }
@@ -144,7 +149,12 @@ class Users extends Controller
     {
         echo 'logout called';
         unset($_SESSION['userID']);
-        unset($_SESSION['user_name']);
+        unset($_SESSION['FirstName']);
+        unset($_SESSION['LastName']);
+        unset($_SESSION['Address']);
+        unset($_SESSION['Email']);
+        unset($_SESSION['MobileNumber']);
+        unset($_SESSION['Type']);
         session_destroy();
         redirect('users/login');
     }
