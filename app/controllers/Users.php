@@ -5,23 +5,23 @@ class Users extends Controller
     {
         $registerModel = $this->getModel();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Process form
+
             $registerModel->setFirstName(trim($_POST['firstname']));
             $registerModel->setLastName(trim($_POST['lastname']));
             $registerModel->setGender(trim($_POST['gender']));
-            $registerModel->setBirthdate(trim($_POST['birthdate']));
+            $registerModel->setBirthdate(trim($_POST['birth_date']));
             $registerModel->setEmail(trim($_POST['email']));
             $registerModel->setAddress(trim($_POST['address']));
-            $registerModel->setMobileNum(trim($_POST['mobilenum']));
+            $registerModel->setMobileNum(trim($_POST['mobile_number']));
             $registerModel->setPassword(trim($_POST['password']));
             $registerModel->setConfirmPassword(trim($_POST['confirm_password']));
 
             //validation
             if (empty($registerModel->getFirstName())) {
-                $registerModel->setFirstNameErr('Please enter a name');
+                $registerModel->setFirstNameErr('Please enter a  First name');
             }
             if (empty($registerModel->getLastName())) {
-                $registerModel->setLastNameErr('Please enter a name');
+                $registerModel->setLastNameErr('Please enter a Last name');
             }
             if (empty($registerModel->getBirthdate())) {
                 $registerModel->setBirthdateErr('Please enter a birthdate');
@@ -33,6 +33,15 @@ class Users extends Controller
             }
             if (empty($registerModel->getAddress())) {
                 $registerModel->setAddressErr('Please enter an address');
+            }
+            if (empty($registerModel->getPassword())) {
+                $registerModel->setPasswordErr('Please enter a password');
+            } 
+            if (empty($registerModel->getConfirmPassword())) {
+                $registerModel->setConfirmPasswordErr('Please enter the password again');
+            }
+            if (empty($registerModel->getGender())) {
+                $registerModel->setGenderErr('Please choose a gender');
             }
             if (empty($registerModel->getMobileNum())) {
                 $registerModel->setMobileNumErr('Please enter an Mobile number');
@@ -125,8 +134,8 @@ class Users extends Controller
 
     public function createUserSession($user)
     {
-        $_SESSION['user_id'] = $user->id;
-        $_SESSION['user_name'] = $user->name;
+        $_SESSION['userID'] = $user->userID;
+        $_SESSION['user_name'] = $user->LastName;
         //header('location: ' . URLROOT . 'pages');
         redirect('pages');
     }
@@ -134,7 +143,7 @@ class Users extends Controller
     public function logout()
     {
         echo 'logout called';
-        unset($_SESSION['user_id']);
+        unset($_SESSION['userID']);
         unset($_SESSION['user_name']);
         session_destroy();
         redirect('users/login');
