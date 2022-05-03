@@ -8,7 +8,7 @@ class LoginModel extends UserModel
         $this->dbh->bind(':email', $this->email);
 
         $record = $this->dbh->single();
-        $hash_pass = $record->password;
+        $hash_pass = $record->Password;
 
         if (password_verify($this->password,  $hash_pass)) {
             return $record;
