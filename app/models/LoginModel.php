@@ -4,7 +4,7 @@ class LoginModel extends UserModel
 {
     public function login()
     {
-        $this->dbh->query('SELECT * from users WHERE email = :email');
+        $this->dbh->query('SELECT * from users WHERE Email = :email');
         $this->dbh->bind(':email', $this->email);
 
         $record = $this->dbh->single();
