@@ -34,7 +34,7 @@
                            <a class="nav-link" href="<?php echo URLROOT . 'pages/AddProducts'; ?>">Add Products</a>
                         </li>
                         <?php endif; }?>
-                        <?php if(isset($_SESSION["Type"])): ?>
+                        <?php if(isset($_SESSION["userID"])): ?>
                         <li class="nav-item">
                            <a class="nav-link" href="users/logout">Logout</a>
                         </li>
