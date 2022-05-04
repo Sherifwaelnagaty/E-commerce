@@ -2,55 +2,33 @@
 require_once 'UserModel.php';
 class cartmodel extends UserModel
 {
-    public  $title = 'User shopping cart Page';
-    protected $username;
-    protected $productname;
+    protected $userid;
     protected $productid;
     protected $quantity;
-    protected $totalprice;
-
 
     public function __construct()
     {
         parent::__construct();
-        $this->username     = "";
-        $this->productname = "";
-
         $this->productid = "";
         $this->quantity = "";
-        $this->totalprice = "";
+        $this->userid = "";
     }
-
-    public function getusername()
+    public function getuserid()
     {
-        return $this->username;
+        return $this->userid;
     }
-
-    public function setusername($username)
+    public function setuserid($userid)
     {
-        $this->username = $username;
+        $this->userid = $userid;
     }
-
-    public function getuserID()
+    public function getproductid()
     {
-        return $this->userID;
+        return $this->productid;
     }
-
-    public function setuserID($userID)
+    public function setproductid($productid)
     {
-        $this->userID = $userID;
+        $this->productid = $productid;
     }
-
-    public function getproductname()
-    {
-        return $this->productname;
-    }
-
-    public function setproductname($productname)
-    {
-        $this->productname = $productname;
-    }
-
     public function getproductid()
     {
         return $this->productid;
@@ -59,7 +37,6 @@ class cartmodel extends UserModel
     {
         $this->productid = $confirmPassword;
     }
-
     public function getquantity()
     {
         return $this->quantity;
@@ -68,22 +45,13 @@ class cartmodel extends UserModel
     {
         $this->quantity = $quantity;
     }
-    public function gettotalprice()
-    {
-        return $this->totalprice;
-    }
-    public function settotalprice($totalprice)
-    {
-        $this->totalprice = $totalprice;
-    }
-
     public function cart()
     {
-        $this->dbh->query("SELECT * FROM users VALUES(:userID, :productID, :productQuantity)");
-        $this->dbh->bind(':userID', $this->userID);
+        $this->dbh->query("SELECT * FROM products VALUES(:userID, :productID, :productQuantity)");
+        $this->dbh->bind(':userID', $this->userid);
         $this->dbh->bind(':productID', $this->productid);
         $this->dbh->bind(':productQuantity', $this->quantity);
-
         return $this->dbh->execute();
     }
 }
+?>
