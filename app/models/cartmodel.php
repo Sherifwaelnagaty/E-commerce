@@ -5,7 +5,9 @@ class cartmodel extends UserModel
     protected $userid;
     protected $productid;
     protected $quantity;
-
+    protected $image;
+    protected $price;
+    protected $name;
     public function __construct()
     {
         parent::__construct();
@@ -39,11 +41,13 @@ class cartmodel extends UserModel
     }
     public function cart()
     {
-        $this->dbh->query("SELECT * FROM products VALUES(:userID, :productID, :productQuantity)");
+        $this->dbh->query("SELECT cart.productQuantity,products.product_name,products.product_price,products.product_image FROM products, cart where products.productID=cart.productID AND products.productID=:userID VALUES(:productQuantity, :productname, :price,:image)");
         $this->dbh->bind(':userID', $this->userid);
-        $this->dbh->bind(':productID', $this->productid);
         $this->dbh->bind(':productQuantity', $this->quantity);
-        return $this->dbh->execute();
+        $this->dbh->bind(':productname', $this->name);
+        $this->dbh->bind(':price', $this->price);
+        $this->dbh->bind(':image', $this->image);
+        return $this->dbh->single();
     }
 }
 ?>
