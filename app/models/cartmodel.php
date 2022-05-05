@@ -29,14 +29,6 @@ class cartmodel extends UserModel
     {
         $this->productid = $productid;
     }
-    public function getproductid()
-    {
-        return $this->productid;
-    }
-    public function setproductid($productid)
-    {
-        $this->productid = $confirmPassword;
-    }
     public function getquantity()
     {
         return $this->quantity;
