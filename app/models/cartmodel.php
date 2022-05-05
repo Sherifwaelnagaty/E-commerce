@@ -14,6 +14,9 @@ class cartmodel extends UserModel
         $this->productid = "";
         $this->quantity = "";
         $this->userid = "";
+        $this->price= "";
+        $this->image= "";
+        $this->name= "";
     }
     public function getuserid()
     {
@@ -38,6 +41,30 @@ class cartmodel extends UserModel
     public function setquantity($quantity)
     {
         $this->quantity = $quantity;
+    }
+    public function getname()
+    {
+        return $this->name;
+    }
+    public function setname($name)
+    {
+        $this->name = $name;
+    }
+    public function getprice()
+    {
+        return $this->price;
+    }
+    public function setprice($price)
+    {
+        $this->price = $price;
+    }
+    public function getimage()
+    {
+        return $this->image;
+    }
+    public function setimage($image)
+    {
+        $this->image = $image;
     }
     public function cart()
     {
