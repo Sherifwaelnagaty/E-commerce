@@ -5,14 +5,14 @@ class ordersmodel extends UserModel
     protected $orderID;
     protected $customerID;
     protected $dateoforder;
-    protected $totalprice;
+    protected $situation;
 
     public function __construct()
     {
         parent::__construct();
         $this->customerID = "";
         $this->dateoforder = "";
-        $this->totalprice = "";
+        $this->orderID ="";
     }
     public function getcustomerID()
     {
@@ -30,12 +30,29 @@ class ordersmodel extends UserModel
     {
         $this->dateoforder = $dateoforder;
     }
-    public function gettotalprice()
+    public function getorderID()
     {
-        return $this->totalprice;
+        return $this->orderID;
     }
-    public function settotalprice($totalprice)
+    public function setorderID($orderID)
     {
-        $this->totalprice = $totalprice;
+        $this->orderID = $orderID;
     }
+    public function getsituation()
+    {
+        return $this->situation;
+    }
+    public function setsituation($situation)
+    {
+        $this->situation = $situation;
+    }
+    public function Myorder()
+    {
+        $this->dbh->query("SELECT orders.orderdate,orders.Situation FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID VALUES(:datee, :orderID,:Situation)");
+        $this->dbh->bind(':userID', $this->customerID);
+        $this->dbh->bind(':datee', $this->dateoforder);
+        $this->dbh->bind(':situation', $this->situation);
+        return $this->dbh->single();
+    }
+
 }
