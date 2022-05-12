@@ -28,5 +28,19 @@ class Pages extends Controller
         $AddProductsView = new AddProducts($this->getModel(), $this);
         $AddProductsView->output();
     }
+    public function cart()
+    {
+        $viewPath = VIEWS_PATH . 'pages/cart.php';
+        require_once $viewPath;
+        $cartView = new cart($this->getModel(), $this);
+        $cartView->output();
+    }
+    public function orders()
+    {
+        $viewPath = VIEWS_PATH . 'pages/orders.php';
+        require_once $viewPath;
+        $cartView = new orders($this->getModel(), $this);
+        $cartView->output();
+    }
 
 }
