@@ -15,7 +15,10 @@
                         </li>
                         <?php if (isset($_SESSION['userID'])) : ?>
                         <li class="nav-item">
-                           <a class="nav-link" href="<?php echo URLROOT . 'pages/Account'; ?>">My account</a>
+                           <a class="nav-link" href="<?php echo URLROOT . 'pages/orders'; ?>">My Orders</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="<?php echo URLROOT . 'pages/Account'; ?>">My Account</a>
                         </li>
                         <?php else : ?>
                         <li class="nav-item">
