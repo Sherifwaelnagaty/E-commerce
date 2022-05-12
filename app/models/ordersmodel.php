@@ -13,6 +13,8 @@ class ordersmodel extends UserModel
         $this->customerID = "";
         $this->dateoforder = "";
         $this->orderID ="";
+        $this->situation= "";
+
     }
     public function getcustomerID()
     {
