@@ -48,6 +48,11 @@ class ordersmodel extends UserModel
     {
         $this->situation = $situation;
     }
+    public function Cancel()
+    {
+        $this->dbh->query("DELETE orders.orderID FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID");
+        $this->dbh->bind(':userID', $this->customerID);    
+    }
     public function Myorder()
     {
         $this->dbh->query("SELECT orders.orderdate,orders.Situation FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID VALUES(:datee, :orderID,:Situation)");
