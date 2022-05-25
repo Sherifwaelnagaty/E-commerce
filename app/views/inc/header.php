@@ -10,7 +10,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="<?php echo URLROOT; ?>images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <title>Reels - Fashion Brand</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="<?php echo URLROOT; ?>css/bootstrap.css" />
       <!-- font awesome style -->
