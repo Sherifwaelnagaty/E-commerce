@@ -3,21 +3,19 @@ require_once 'UserModel.php';
 class ProductsModel extends UserModel
 {
 	protected $productid;
-    protected $name;
-    protected $type;
-    protected $quantity;
-    protected $price;
-    protected $image;
+    protected $product_name;
+    protected $product_type;
+    protected $product_price;
+    protected $product_image;
 
     public function __construct()
     {
         parent::__construct();
-        $this->name = "";
-        $this->productname = "";
-        $this->image = "";
         $this->productid = "";
-        $this->quantity = "";
-        $this->price = "";
+        $this->product_name = "";
+        $this->product_image = "";
+        $this->product_price = "";
+        $this->product_type= "";
     }
     public function getproductid()
     {
@@ -29,55 +27,45 @@ class ProductsModel extends UserModel
     }
     public function getname()
     {
-        return $this->name;
+        return $this->product_name;
     }
-    public function setname($name)
+    public function setname($product_name)
     {
-        $this->name = $name;
+        $this->product_name = $product_name;
     }
     public function getimage()
     {
-        return $this->image;
+        return $this->product_image;
     }
-    public function setimage($image)
+    public function setimage($product_image)
     {
-        $this->productname = $productname;
+        $this->productname = $product_image;
     }
     public function getprice()
     {
-        return $this->price;
+        return $this->product_price;
     }
-    public function setprice($price)
+    public function setprice($product_price)
     {
-        $this->price = $price;
-    }
-    public function getquantity()
-    {
-        return $this->quantity;
-    }
-    public function setquantity($quantity)
-    {
-        $this->quantity = $quantity;
+        $this->product_price = $product_price;
     }
     public function gettype()
     {
-        return $this->type;
+        return $this->product_type;
     }
-    public function settype($type)
+    public function settype($product_type)
     {
-        $this->type = $type;
+        $this->product_type = $product_type;
     }
     public function product()
     {
-        $this->dbh->query("SELECT * FROM products VALUES(:userID, :productID, :productQuantity)");
-        $this->dbh->bind(':userID', $this->userID);
-        $this->dbh->bind(':productID', $this->productid);
-        $this->dbh->bind(':productQuantity', $this->quantity);
-        $this->dbh->bind(':name', $this->name);
-        $this->dbh->bind(':type', $this->type);
-        $this->dbh->bind(':image', $this->image);
-        $this->dbh->bind(':price', $this->price);
-        return $this->dbh->execute();
+        $this->dbh->query("SELECT * FROM products");
+        return $this->dbh->single();
+    }
+    public function productcount()
+    {
+        $this->product();
+        return $this->dbh->rowCount();
     }
 }
 ?>
