@@ -2,7 +2,7 @@
 require_once 'UserModel.php';
 class ProductsModel extends UserModel
 {
-	protected $productid;
+    protected $productid;
     protected $product_name;
     protected $product_type;
     protected $product_price;
@@ -60,7 +60,7 @@ class ProductsModel extends UserModel
     public function product()
     {
         $this->dbh->query("SELECT * FROM products");
-        return $this->dbh->single();
+        return $this->dbh->resultSet();
     }
     public function productcount()
     {
