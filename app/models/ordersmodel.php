@@ -3,26 +3,16 @@ require_once 'UserModel.php';
 class ordersmodel extends UserModel
 {
     protected $orderID;
-    protected $customerID;
     protected $dateoforder;
     protected $situation;
 
     public function __construct()
     {
         parent::__construct();
-        $this->customerID = "";
         $this->dateoforder = "";
         $this->orderID ="";
         $this->situation= "";
 
-    }
-    public function getcustomerID()
-    {
-        return $this->customerID;
-    }
-    public function setcustomerID($customerID)
-    {
-        $this->customerID = $customerID;
     }
     public function getdateoforder()
     {
@@ -51,15 +41,12 @@ class ordersmodel extends UserModel
     public function Cancel()
     {
         $this->dbh->query("DELETE orders.orderID FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID");
-        $this->dbh->bind(':userID', $this->customerID);    
+        $this->dbh->bind(':userID', $this->userid);    
     }
     public function Myorder()
     {
-        $this->dbh->query("SELECT orders.orderdate,orders.Situation FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID VALUES(:datee, :orderID,:Situation)");
-        $this->dbh->bind(':userID', $this->customerID);
-        $this->dbh->bind(':datee', $this->dateoforder);
-        $this->dbh->bind(':situation', $this->situation);
-        return $this->dbh->single();
+        $this->dbh->query("SELECT orders.orderdate,orders.Situation FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID");
+        $this->dbh->bind(':userID', $this->userid);
+        return $this->dbh->resultSet();
     }
-
 }
