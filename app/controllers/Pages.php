@@ -10,13 +10,6 @@ class Pages extends Controller
         $indexView->output();
     }
     public function Products(){
-        $userModel = $this->getModel();
-        while($loggedUser = $userModel->product()){
-        $_SESSION['product_name']=$loggedUser->product_name;
-        $_SESSION['product_type']=$loggedUser->product_type;
-        $_SESSION['product_price']=$loggedUser->product_price;
-        $_SESSION['product_image']=$loggedUser->product_image;
-        }
         $viewPath = VIEWS_PATH . 'pages/Products.php';
         require_once $viewPath;
         $productView = new Products($this->getModel(), $this);
