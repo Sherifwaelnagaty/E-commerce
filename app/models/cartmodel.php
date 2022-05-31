@@ -68,13 +68,9 @@ class cartmodel extends UserModel
     }
     public function cart()
     {
-        $this->dbh->query("SELECT cart.productQuantity,products.product_name,products.product_price,products.product_image FROM products, cart where products.productID=cart.productID AND products.productID=:userID VALUES(:productQuantity, :productname, :price,:image)");
+        $this->dbh->query("SELECT cart.productQuantity,products.product_name,products.product_price,products.product_image FROM products, cart where products.productID=cart.productID AND products.productID=:userID");
         $this->dbh->bind(':userID', $this->userid);
-        $this->dbh->bind(':productQuantity', $this->quantity);
-        $this->dbh->bind(':productname', $this->name);
-        $this->dbh->bind(':price', $this->price);
-        $this->dbh->bind(':image', $this->image);
-        return $this->dbh->single();
+        return $this->dbh->resultSet();
     }
 }
 ?>
