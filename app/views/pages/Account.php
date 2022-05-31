@@ -33,14 +33,14 @@ class Account extends View
     public function printFirstName(){
         $val=$_SESSION['FirstName'];
         $text=<<<EOT
-                    <div class="col-md-6"><label class="labels">FirstName</label><input type="text" class="form-control" value=$val></div>
+                    <div class="col-md-6"><label class="labels">FirstName</label><input type="text" class="form-control" value=$val name="firstname"></div>
             EOT;
             echo $text;
     }
     public function printLastName(){
         $val=$_SESSION['LastName'];
         $text=<<<EOT
-            <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value=$val placeholder="surname"></div>
+            <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control" value=$val placeholder="surname" name="lastname"></div>
                 </div>
             EOT;
             echo $text;
@@ -49,14 +49,14 @@ class Account extends View
         $val=$_SESSION['MobileNumber'];
         $text=<<<EOT
             <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" value=$val><br></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" value=$val name="mobile_number"><br></div>
             EOT;
             echo $text;
     }
     public function printAddress(){
         $val=$_SESSION['Address'];
         $text=<<<EOT
-             <div class="col-md-12"><label class="labels">Address</label><textarea type="text" class="form-control" value=$val></textarea></div>
+             <div class="col-md-12"><label class="labels">Address</label><textarea type="text" class="form-control" value=$val name="address"></textarea></div>
                 </div>
             EOT;
             echo $text;
@@ -76,7 +76,7 @@ class Account extends View
         $text=<<<EOT
             <div class="col-md-4">
             <div class="p-3 py-5"><br><br>
-                <div class="col-md-12"><label class="labels">Email Address</label><input type="text" class="form-control" placeholder="Enter Your Email Address" value=$val></div> <br>
+                <div class="col-md-12"><label class="labels">Email Address</label><input type="text" class="form-control" placeholder="Enter Your Email Address" value=$val name="email"></div> <br>
             </div>
             </div>
             </div>
