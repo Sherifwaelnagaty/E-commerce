@@ -16,6 +16,45 @@ class Pages extends Controller
         $productView->output();
     }
     public function Account(){
+         $registerModel = $this->getModel();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $registerModel->setFirstName(trim($_POST['firstname']));
+            $registerModel->setLastName(trim($_POST['lastname']));
+            $registerModel->setEmail(trim($_POST['email']));
+            $registerModel->setAddress(trim($_POST['address']));
+            $registerModel->setMobileNum(trim($_POST['mobile_number']));
+
+            //validation
+            if (empty($registerModel->getFirstName())) {
+                $registerModel->setFirstNameErr('Please enter a First name');
+            }
+            if (empty($registerModel->getLastName())) {
+                $registerModel->setLastNameErr('Please enter a Last name');
+            }
+            if (empty($registerModel->getEmail())) {
+                $registerModel->setEmailErr('Please enter an email');
+            }elseif ($registerModel->emailExist($_POST['email'])) {
+                $registerModel->setEmailErr('Email is already registered');
+            }
+            if (empty($registerModel->getAddress())) {
+                $registerModel->setAddressErr('Please enter an address');
+            }
+            if (
+                empty($registerModel->getFirstNameErr()) &&
+                empty($registerModel->getLastNameErr()) &&
+                empty($registerModel->getEmailErr()) &&
+                empty($registerModel->getAddressErr())
+            ) {
+                if ($registerModel->Edit()) {
+                    //header('location: ' . URLROOT . 'users/login');
+                    flash('register_success', 'You have registered successfully');
+                    redirect('public');
+                } else {
+                    die('Error in sign up');
+                }
+            }
+        }
         $viewPath = VIEWS_PATH . 'pages/Account.php';
         require_once $viewPath;
         $AccountView = new Account($this->getModel(), $this);
