@@ -2,7 +2,6 @@
 require_once 'UserModel.php';
 class cartmodel extends UserModel
 {
-    protected $userid;
     protected $productid;
     protected $quantity;
     protected $image;
@@ -13,7 +12,6 @@ class cartmodel extends UserModel
         parent::__construct();
         $this->productid = "";
         $this->quantity = "";
-        $this->userid = "";
         $this->price= "";
         $this->image= "";
         $this->name= "";
@@ -68,7 +66,12 @@ class cartmodel extends UserModel
     }
     public function cart()
     {
-        $this->dbh->query("SELECT cart.productQuantity,products.product_name,products.product_price,products.product_image FROM products, cart where products.productID=cart.productID AND products.productID=:userID");
+        $this->dbh->query("SELECT cart.productQuantity,products.product_name,products.product_price FROM products,cart,users where products.productID=cart.productID AND users.userID=cart.userID AND users.userID=:userID");
+        $this->dbh->bind(':userID', $this->getuserid());
+        return $this->dbh->resultSet();
+    }
+    public function Addcart($productid){
+        $this->dbh->query("INSERT INTO `cart`(`productID`, `userID`, `productQuantity`) VALUES ($productid,:userID,1)");
         $this->dbh->bind(':userID', $this->userid);
         return $this->dbh->resultSet();
     }
