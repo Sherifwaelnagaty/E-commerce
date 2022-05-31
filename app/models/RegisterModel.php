@@ -174,4 +174,13 @@ class RegisterModel extends UserModel
         $this->dbh->bind(':type', 'Customer');
         return $this->dbh->execute();
     }
+    public function Edit(){
+    $this->dbh->query('UPDATE `users` SET `userID`=:userID,`FirstName`=:firstname,`LastName`=:lastname,`Address`=:address,`Email`=:email');
+    $this->dbh->bind(':userID', $this->userid);
+    $this->dbh->bind(':firstname', $this->firstName);
+    $this->dbh->bind(':lastname', $this->lastName);
+    $this->dbh->bind(':email', $this->email);
+    $this->dbh->bind(':address', $this->address);
+    return $this->dbh->execute();
+    }
 }
