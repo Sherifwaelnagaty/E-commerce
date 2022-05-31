@@ -24,16 +24,11 @@ class cart extends View
       </thead>
     EOT;
     echo $text;
-    $model=$this->model;
-    $result=$model->cart();
-    foreach($result as $row){
-      $this->printImage();
       $this->printname();
       $this->printprice();
       $this->printQuantity();
       $this->printTotal();
-    }
-  }     
+    }     
   //   <aside>
   //     <div class="summary">
   //       <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
@@ -53,55 +48,57 @@ class cart extends View
   //   </aside>
   //   </div>    
   // </main>
-  private function printImage()
-  {
-      $val = $this->model->getimage();
-      $text = <<<EOT
-      <div class="item">
-          <div class="product-image">
-            <img src="$val" alt="Placholder Image 2" class="product-frame">
-          </div>
-      EOT;
-      echo $text;
-  }
   private function printname()
   {
-      $val = $this->model->getname();
+      $model=$this->model;
+      $date=$model->cart();
+      foreach($date as $row){
+      $val=$row['product_name'];
       $text = <<<EOT
-      <div class="product-details">
-      <h1><strong><span class="item-quantity">$val</h1>
+      <tr>
+      <td>$val</td>
       EOT;
       echo $text;
+    }
   }
   private function printprice()
   {
-      $val = $this->model->getprice();
+      $model=$this->model;
+      $date=$model->cart();
+      foreach($date as $row){
+      $val=$row['product_price'];
       $text = <<<EOT
-      </div>
-         <div class="price">$val</div>
+      <td>$val</td>
       EOT;
       echo $text;
+    }
   }
   private function printQuantity()
   {
-      $val = $this->model->getquantity();
+      $model=$this->model;
+      $date=$model->cart();
+      foreach($date as $row){
+      $val=$row['productQuantity'];
       $text = <<<EOT
-         <div class="quantity">
-           <input type="number" value=$val min="1" class="quantity-field">
-         </div>
-      EOT;
+         <td>$val</td>
+      EOT; 
       echo $text;
+    }
   }
   private function printTotal()
   {
-      $val = $this->model->getquantity();
-      $val1 = $this->model->getprice();
+      $model=$this->model;
+      $date=$model->cart();
+      foreach($date as $row){
+      $val=$row['productQuantity'];
+      $val1=$row['product_price'];
       $totalval=$val*$val1;
       $text = <<<EOT
-      <div class="subtotal">$totalval</div>
-      </div>
+      <td>$totalval</td>
+      </tr>
       EOT;
       echo $text;
   }
+}
 }
 ?>
