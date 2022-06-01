@@ -10,6 +10,14 @@ class Pages extends Controller
         $indexView->output();
     }
     public function Products(){
+        $registerModel = $this->getModel();
+        if (isset($_GET['id'])){
+            $registerModel->setproductid(trim($_GET['id']));
+            if($registerModel->Addcart($registerModel->getproductID())){
+                flash('register_success', 'You have registered successfully');
+                redirect('pages/cart');
+            }
+        }
         $viewPath = VIEWS_PATH . 'pages/Products.php';
         require_once $viewPath;
         $productView = new Products($this->getModel(), $this);
