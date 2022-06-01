@@ -62,6 +62,22 @@ class Pages extends Controller
     }
     public function AddProducts()
     {
+        $registerModel = $this->getModel();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $dir="images/";
+            $Profile_Picture=$dir.$_FILES['product_image']['name'];   
+            $registerModel->setproduct_name(trim($_POST['productname']));
+            $registerModel->setproduct_image($Profile_Picture);
+            $registerModel->setproduct_price(trim($_POST['productprice']));
+            $registerModel->setproduct_type(trim($_POST['producttype']));
+            $registerModel->setproductID(trim($_POST['productID']));
+            
+            if ($registerModel->AddProduct()) {
+                redirect('public/Index');
+                } else {
+                    die('Error');
+                }
+        }
         $viewPath = VIEWS_PATH . 'pages/AddProducts.php';
         require_once $viewPath;
         $AddProductsView = new AddProducts($this->getModel(), $this);
