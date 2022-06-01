@@ -29,8 +29,8 @@ class AddProducts extends View
     $this->producttype();
     $this->productprice();
     $this->productID();
-    $this->productImage();
     $this->printButton();
+    $this->productImage();
     $text=<<<EOT
             <div class="row mt-3">
                 </div>
