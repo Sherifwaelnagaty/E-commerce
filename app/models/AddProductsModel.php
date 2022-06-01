@@ -69,7 +69,7 @@ class AddProductsModel extends model
 
      public function addProduct()
     {
-        $this->dbh->query("INSERT INTO users (`productID`, `product_name` , `product_type`, `product_price`, `product_image `) 
+        $this->dbh->query("INSERT INTO products (`productID`, `product_name` , `product_type`, `product_price`, `product_image `) 
             VALUES(:productID, :product_name, :product_type, :product_price, :product_image)");
         $this->dbh->bind(':productID', $this->productID);
         $this->dbh->bind(':product_name', $this->product_name);
