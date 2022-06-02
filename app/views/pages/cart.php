@@ -24,81 +24,56 @@ class cart extends View
       </thead>
     EOT;
     echo $text;
-      $this->printname();
-      $this->printprice();
-      $this->printQuantity();
-      $this->printTotal();
-    }     
-  //   <aside>
-  //     <div class="summary">
-  //       <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
-  //       <div class="summary-subtotal">
-  //         <div class="subtotal-title">Subtotal</div>
-  //         <div class="subtotal-value final-value" id="basket-subtotal">130.00</div>
-  //         <div class="summary-promo hide">
-  //           <div class="promo-title">Promotion</div>
-  //           <div class="promo-value final-value" id="basket-promo"></div>
-  //         </div>
-  //       </div>
-  //         <div class="summary-total">
-  //         <div class="total-title">Total</div>
-  //         <div class="total-value final-value" id="basket-total">130.00</div>
-  //       </div>
-  //     </div>
-  //   </aside>
-  //   </div>    
-  // </main>
-  private function printname()
+    $model=$this->model;
+    $date=$model->cart();
+    foreach($date as $row){
+      $this->printname($row['product_name']);
+      $this->printQuantity($row['productQuantity']); 
+      $this->printprice($row['product_price']);
+      $this->printTotal($row['productQuantity'],$row['product_price']);
+      $this->Delete($row['cartID']);
+    }
+  }     
+  private function printname($val)
   {
-      $model=$this->model;
-      $date=$model->cart();
-      foreach($date as $row){
-      $val=$row['product_name'];
       $text = <<<EOT
       <tr>
       <td>$val</td>
       EOT;
       echo $text;
-    }
   }
-  private function printprice()
+  private function printprice($val)
   {
-      $model=$this->model;
-      $date=$model->cart();
-      foreach($date as $row){
-      $val=$row['product_price'];
       $text = <<<EOT
       <td>$val</td>
       EOT;
       echo $text;
-    }
   }
-  private function printQuantity()
+  private function printQuantity($val)
   {
-      $model=$this->model;
-      $date=$model->cart();
-      foreach($date as $row){
-      $val=$row['productQuantity'];
       $text = <<<EOT
          <td>$val</td>
       EOT; 
       echo $text;
-    }
   }
-  private function printTotal()
+  private function Delete($val)
   {
-      $model=$this->model;
-      $date=$model->cart();
-      foreach($date as $row){
-      $val=$row['productQuantity'];
-      $val1=$row['product_price'];
-      $totalval=$val*$val1;
+      $action=URLROOT.'pages/cart?id='.$val;
       $text = <<<EOT
-      <td>$totalval</td>
+      <td>
+      <a href=$action>X</a>
+      </td>
       </tr>
       EOT;
       echo $text;
   }
-}
+  private function printTotal($val,$val1)
+  {
+      $totalval=$val*$val1;
+      $text = <<<EOT
+      <td>$totalval</td>
+      EOT;
+      echo $text;  
+  }
 }
 ?>
