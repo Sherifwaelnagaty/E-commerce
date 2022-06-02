@@ -21,45 +21,37 @@ class orders extends View
       </thead>
     EOT;
     echo $text;
-    $this->PrintDate();
-    $this->PrintSituation();
     $model=$this->model;
     $order=$model->Myorder();
-    if(isset($order->orderdate)){
-    $this->PrintCancel();
+    foreach($order as $row){
+    $this->PrintDate($row['orderdate']);
+    $this->PrintSituation($row['Situation']);
+    if(isset($row['orderdate'])){
+    $this->PrintCancel($row['orderID']);
     }
   }
-  public function PrintDate(){
-      $model=$this->model;
-      $date=$model->Myorder();
-      foreach($date as $row){
-      $val=$row['orderdate']; 
+}
+  private function PrintDate($val){
       $text = <<<EOT
       <tr>
       <td>$val</td>
       EOT;
       echo $text;
-    }
   }
-  public function PrintSituation(){
-      $model=$this->model;
-      $situation=$model->Myorder();
-      foreach($situation as $row){
-      $val=$row['Situation'];
+  private function PrintSituation($val){
       $text = <<<EOT
       <td>$val</td>
       EOT;
       echo $text;
-    }
   }
-  public function PrintCancel(){
-      $val= $this->model;
-      $cancel=$val->Cancel();
+  private function PrintCancel($val){
+      $action=URLROOT.'pages/orders?id='.$val;
       $text = <<<EOT
-      <td><a href=$cancel><button type="submit" class="button" value="Delete" class="btn btn-primary"  onclick="">Cancel</button></a></td>
+      <form action=$action method="POST">
+      <td><input type="Submit" value="Cancel Order"</td>
       </tr>
       EOT;
       echo $text;
-  }
+}
 }
 ?>
