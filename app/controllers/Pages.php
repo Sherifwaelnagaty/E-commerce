@@ -101,7 +101,7 @@ class Pages extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){    
             $registerModel->setcartid(trim($_GET['id']));
             if ($registerModel->Order()) {
-                    redirect('users/orders');
+                    redirect('Index');
                 }
         }
         $viewPath = VIEWS_PATH . 'pages/cart.php';
@@ -112,19 +112,13 @@ class Pages extends Controller
     public function orders()
     {
         $registerModel = $this->getModel();
-        $date=$registerModel->Myorder();
-        foreach($date as $row){
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){    
-            $registerModel->setdateoforder(trim($row['orderdate']));
-            $registerModel->setorderID(trim($row['orderID']));
-            $registerModel->setsituation(trim($row['Situation']));
-            
+            $registerModel->setorderID(trim($_GET['id']));            
             if ($registerModel->Cancel()) {
-                    redirect('users/login');
+                    redirect('Index');
                 } else {
                     die('Error in sign up');
                 }
-            }
         }
         $viewPath = VIEWS_PATH . 'pages/orders.php';
         require_once $viewPath;
