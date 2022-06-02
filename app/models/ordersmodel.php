@@ -40,7 +40,7 @@ class ordersmodel extends UserModel
     }
     public function Cancel()
     {
-        $this->dbh->query("DELETE orders.orderID FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID AND orders.orderID=:orderID");
+        $this->dbh->query("DELETE orders FROM orders WHERE orders.userID=:userID AND orders.orderID=:orderID");
         $this->dbh->bind(':userID', $_SESSION['userID']);
         $this->dbh->bind(':orderID', $this->orderID);
         return $this->dbh->execute();    
