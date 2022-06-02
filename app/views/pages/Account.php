@@ -56,7 +56,7 @@ class Account extends View
     public function printAddress(){
         $val=$_SESSION['Address'];
         $text=<<<EOT
-             <div class="col-md-12"><label class="labels">Address</label><textarea type="text" class="form-control" value=$val name="address"></textarea></div>
+             <div class="col-md-12"><label class="labels">Address</label>input type="text" class="form-control" value=$val name="address"></div>
                 </div>
             EOT;
             echo $text;
