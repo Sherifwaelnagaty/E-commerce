@@ -4,6 +4,7 @@ class Index extends View
   public function output()
   {
     require APPROOT . '/views/inc/header.php';
+    $products=URLROOT . 'pages/Products';
     $text = <<<EOT
     <section class="slider_section ">
             <div class="slider_bg_box">
@@ -27,7 +28,7 @@ class Index extends View
                                     Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
                                  </p>
                                  <div class="btn-box">
-                                    <a href="" class="btn1">
+                                    <a href=$products class="btn1">
                                     Shop Now
                                     </a>
                                  </div>
