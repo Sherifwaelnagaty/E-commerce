@@ -11,53 +11,50 @@ class Pages extends Controller
     }
     public function Products(){
         $registerModel = $this->getModel();
-        if (isset($_GET['id'])){
-            $registerModel->setproductid(trim($_GET['id']));
-            if($registerModel->Addcart($registerModel->getproductID())){
-                flash('register_success', 'You have registered successfully');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $registerModel->setproductid(trim($_GET['ID']));
+            if($registerModel->Addcart($_GET['ID'])){
                 redirect('pages/cart');
             }
-        }
+        }      
         $viewPath = VIEWS_PATH . 'pages/Products.php';
         require_once $viewPath;
         $productView = new Products($this->getModel(), $this);
         $productView->output();
     }
     public function Account(){
-         $registerModel = $this->getModel();
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $registerModel->setFirstName(trim($_POST['firstname']));
-            $registerModel->setLastName(trim($_POST['lastname']));
-            $registerModel->setEmail(trim($_POST['email']));
-            $registerModel->setAddress(trim($_POST['address']));
-            $registerModel->setMobileNum(trim($_POST['mobile_number']));
+        $registerModel = $this->getModel();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $registerModel->setFirst_Name(trim($_POST['firstname']));
+            $registerModel->setLast_Name(trim($_POST['lastname']));
+            $registerModel->set_Email(trim($_POST['email']));
+            $registerModel->set_Address(trim($_POST['address']));
+            $registerModel->set_MobileNum(trim($_POST['mobile_number']));
 
             //validation
-            if (empty($registerModel->getFirstName())) {
-                $registerModel->setFirstNameErr('Please enter a First name');
+            if (empty($registerModel->getFirst_Name())) {
+                $registerModel->setFirst_NameErr('Please enter a First name');
             }
-            if (empty($registerModel->getLastName())) {
-                $registerModel->setLastNameErr('Please enter a Last name');
+            if (empty($registerModel->getLast_Name())) {
+                $registerModel->setLast_NameErr('Please enter a Last name');
             }
-            if (empty($registerModel->getEmail())) {
-                $registerModel->setEmailErr('Please enter an email');
-            }elseif ($registerModel->emailExist($_POST['email'])) {
-                $registerModel->setEmailErr('Email is already registered');
+            if (empty($registerModel->get_Email())) {
+                $registerModel->set_EmailErr('Please enter an email');
             }
-            if (empty($registerModel->getAddress())) {
-                $registerModel->setAddressErr('Please enter an address');
+            elseif ($registerModel->email_Exist($_POST['email'])) {
+                $registerModel->set_EmailErr('Email is already registered');
+            }
+            if (empty($registerModel->get_Address())) {
+                $registerModel->set_AddressErr('Please enter an address');
             }
             if (
-                empty($registerModel->getFirstNameErr()) &&
-                empty($registerModel->getLastNameErr()) &&
-                empty($registerModel->getEmailErr()) &&
-                empty($registerModel->getAddressErr())
+                empty($registerModel->getFirst_NameErr()) &&
+                empty($registerModel->getLast_NameErr()) &&
+                empty($registerModel->get_EmailErr()) &&
+                empty($registerModel->get_AddressErr())
             ) {
                 if ($registerModel->Edit()) {
-                    //header('location: ' . URLROOT . 'users/login');
-                    flash('register_success', 'You have registered successfully');
-                    redirect('public');
+                    redirect('Index');
                 } else {
                     die('Error in sign up');
                 }
@@ -73,7 +70,8 @@ class Pages extends Controller
         $registerModel = $this->getModel();
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $dir="images/";
-            $Profile_Picture=$dir.$_FILES['product_image']['name'];   
+            $Profile_Picture=$dir.$_FILES['product_image']['name'];
+            move_uploaded_file($_FILES['Pic']['tmp_name'],$Profile_Picture);   
             $registerModel->setproduct_name(trim($_POST['productname']));
             $registerModel->setproduct_image($Profile_Picture);
             $registerModel->setproduct_price(trim($_POST['productprice']));
@@ -93,6 +91,13 @@ class Pages extends Controller
     }
     public function cart()
     {
+        $registerModel = $this->getModel();
+        if (isset($_GET['id'])){    
+            $registerModel->setcartid(trim($_GET['id']));
+            if ($registerModel->Remove()) {
+                    redirect('users/login');
+                }
+        }
         $viewPath = VIEWS_PATH . 'pages/cart.php';
         require_once $viewPath;
         $cartView = new cart($this->getModel(), $this);
@@ -100,6 +105,21 @@ class Pages extends Controller
     }
     public function orders()
     {
+        $registerModel = $this->getModel();
+        $date=$registerModel->Myorder();
+        foreach($date as $row){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){    
+            $registerModel->setdateoforder(trim($row['orderdate']));
+            $registerModel->setorderID(trim($row['orderID']));
+            $registerModel->setsituation(trim($row['Situation']));
+            
+            if ($registerModel->Cancel()) {
+                    redirect('users/login');
+                } else {
+                    die('Error in sign up');
+                }
+            }
+        }
         $viewPath = VIEWS_PATH . 'pages/orders.php';
         require_once $viewPath;
         $ordersView = new orders($this->getModel(), $this);
@@ -112,5 +132,5 @@ class Pages extends Controller
         $Products_DetailedView = new Products_Detailed($this->getModel(), $this);
         $Products_DetailedView->output();
     }
-
 }
+?>
