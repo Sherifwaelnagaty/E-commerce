@@ -84,5 +84,13 @@ class cartmodel extends UserModel
         $this->dbh->bind(':cartid', $this->cartid);
         return $this->dbh->resultSet();
     }
+    public function Order(){
+        $this->dbh->query("INSERT INTO `orders`(`userID`, `orderID`, `orderdate`, `Situation`) VALUES (:userID,:cartid,:orderdate,'ordered')");
+        $this->dbh->bind(':userID', $_SESSION['userID']);
+        $this->dbh->bind(':cartid', $this->cartid);
+        $this->dbh->bind(':orderdate', date("Y/m/d"));
+        return $this->dbh->execute();
+    }
+}
 }
 ?>
