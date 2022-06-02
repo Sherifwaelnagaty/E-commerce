@@ -16,6 +16,14 @@ class cartmodel extends UserModel
         $this->image= "";
         $this->name= "";
     }
+    public function getcartid()
+    {
+        return $this->cartid;
+    }
+    public function setcartid($cartid)
+    {
+        $this->cartid = $cartid;
+    }
     public function getuserid()
     {
         return $this->userid;
@@ -66,13 +74,14 @@ class cartmodel extends UserModel
     }
     public function cart()
     {
-        $this->dbh->query("SELECT cart.productQuantity,products.product_name,products.product_price FROM products,cart,users where products.productID=cart.productID AND users.userID=cart.userID AND users.userID=:userID");
-        $this->dbh->bind(':userID', $this->getuserid());
+        $this->dbh->query("SELECT cart.productQuantity,products.product_name,products.product_price,cart.cartID FROM products,cart,users where products.productID=cart.productID AND users.userID=cart.userID AND users.userID=:userID");
+        $this->dbh->bind(':userID', $_SESSION['userID']);
         return $this->dbh->resultSet();
     }
-    public function Addcart($productid){
-        $this->dbh->query("INSERT INTO `cart`(`productID`, `userID`, `productQuantity`) VALUES ($productid,:userID,1)");
-        $this->dbh->bind(':userID', $this->userid);
+    public function Remove()
+    {
+        $this->dbh->query("DELETE FROM `cart` WHERE cartID=:cartid");
+        $this->dbh->bind(':cartid', $this->cartid);
         return $this->dbh->resultSet();
     }
 }
