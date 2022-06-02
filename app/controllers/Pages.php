@@ -98,6 +98,12 @@ class Pages extends Controller
                     redirect('users/login');
                 }
         }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){    
+            $registerModel->setcartid(trim($_GET['id']));
+            if ($registerModel->Order()) {
+                    redirect('users/orders');
+                }
+        }
         $viewPath = VIEWS_PATH . 'pages/cart.php';
         require_once $viewPath;
         $cartView = new cart($this->getModel(), $this);
