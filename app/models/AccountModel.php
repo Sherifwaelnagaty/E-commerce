@@ -1,4 +1,35 @@
-public function getFirst_Name()
+<?php
+require_once 'UserModel.php';
+class AccountModel extends UserModel
+{
+    protected $firstName;
+    protected $firstNameErr;
+
+    protected $lastName;
+    protected $lastNameErr;
+
+    protected $address;
+    protected $addressErr;
+
+    protected $mobileNum;
+    protected $mobileNumErr;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->firstName = "";
+        $this->firstNameErr = "";
+
+        $this->lastName = "";
+        $this->lastNameErr = "";
+
+        $this->address = "";
+        $this->addressErr = "";
+
+        $this->mobileNum = "";
+        $this->mobileNumErr = "";
+    }
+    public function getFirst_Name()
     {
         return $this->firstName;
     }
