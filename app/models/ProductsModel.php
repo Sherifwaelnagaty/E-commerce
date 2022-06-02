@@ -73,4 +73,9 @@ class ProductsModel extends UserModel
         $this->dbh->query("DELETE productID FROM products WHERE productID =:productid");
         $this->dbh->bind(':productid', $this->productid);    
     }
+    public function Addcart($productid){
+        $this->dbh->query("INSERT INTO `cart`(`productID`, `userID`, `productQuantity`) VALUES ($productid,:userID,1)");
+        $this->dbh->bind(':userID', $_SESSION['userID']);
+        return $this->dbh->resultSet();
+    }
 }
