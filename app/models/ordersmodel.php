@@ -40,13 +40,15 @@ class ordersmodel extends UserModel
     }
     public function Cancel()
     {
-        $this->dbh->query("DELETE orders.orderID FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID");
-        $this->dbh->bind(':userID', $this->userid);    
+        $this->dbh->query("DELETE orders.orderID FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID AND orders.orderID=:orderID");
+        $this->dbh->bind(':userID', $_SESSION['userID']);
+        $this->dbh->bind(':orderID', $this->orderID);
+        return $this->dbh->execute();    
     }
     public function Myorder()
     {
         $this->dbh->query("SELECT orders.orderdate,orders.Situation FROM users,orders WHERE users.userID=orders.userID AND users.userID=:userID");
-        $this->dbh->bind(':userID', $this->userid);
+        $this->dbh->bind(':userID', $_SESSION['userID']);
         return $this->dbh->resultSet();
     }
 }
