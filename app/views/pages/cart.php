@@ -9,9 +9,7 @@ class cart extends View
   }
   public function PrintTable()
   {
-    $style=URLROOT.'css/cart.css';
     $text=<<<EOT
-    <link href="$style" rel="stylesheet"/>
     <div class="container">
       <table class="table table-hover">
       <thead>
@@ -30,10 +28,10 @@ class cart extends View
       $this->printname($row['product_name']);
       $this->printQuantity($row['productQuantity']); 
       $this->printprice($row['product_price']);
-      $this->printTotal($row['productQuantity'],$row['product_price']);
+      $this->printsubTotal($row['productQuantity'],$row['product_price']);
       $this->Delete($row['cartID']);
     }
-      $text1=<<<EOT
+    $text1=<<<EOT
     <div class="container">
       <table class="table table-hover">
       <thead>
@@ -108,12 +106,12 @@ class cart extends View
       foreach($date as $row){
       $action=URLROOT.'Pages/cart?id='.$row['cartID'];
       }
-      }
       $text = <<<EOT
       <form action="$action" method="POST">
       <input type="submit" Value="Order">
       EOT;
       echo $text;
+  }
   }
 }
 ?>
