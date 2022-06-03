@@ -2,21 +2,22 @@
 require_once 'UserModel.php';
 class ProductsModel extends UserModel
 {
-    
-    protected $productid;
-    protected $product_name;
-    protected $product_type;
-    protected $product_price;
-    protected $product_image;
+	protected $productid;
+    protected $name;
+    protected $type;
+    protected $size;
+    protected $price;
+    protected $image;
 
     public function __construct()
     {
         parent::__construct();
+        $this->name = "";
+        $this->image = "";
         $this->productid = "";
-        $this->product_name = "";
-        $this->product_image = "";
-        $this->product_price = "";
-        $this->product_type= "";
+        $this->size = "";
+        $this->price = "";
+        $this->type = "";
     }
     public function getproductid()
     {
@@ -28,54 +29,71 @@ class ProductsModel extends UserModel
     }
     public function getname()
     {
-        return $this->product_name;
+        return $this->name;
     }
-    public function setname($product_name)
+    public function setname($name)
     {
-        $this->product_name = $product_name;
+        $this->name = $name;
     }
     public function getimage()
     {
-        return $this->product_image;
+        return $this->image;
     }
-    public function setimage($product_image)
+    public function setimage($image)
     {
-        $this->productname = $product_image;
+        $this->productname = $productname;
     }
     public function getprice()
     {
-        return $this->product_price;
+        return $this->price;
     }
-    public function setprice($product_price)
+    public function setprice($price)
     {
-        $this->product_price = $product_price;
+        $this->price = $price;
+    }
+    public function getsize()
+    {
+        return $this->size;
+    }
+    public function setsize($size)
+    {
+        $this->size = $size;
     }
     public function gettype()
     {
-        return $this->product_type;
+        return $this->type;
     }
-    public function settype($product_type)
+    public function settype($type)
     {
-        $this->product_type = $product_type;
+        $this->type = $type;
     }
     public function product()
     {
-        $this->dbh->query("SELECT * FROM products");
+        $this->dbh->query("SELECT * FROM products VALUES(:userID, :productID, :productQuantity)");
+        $this->dbh->bind(':userID', $this->userID);
+        $this->dbh->bind(':productID', $this->productid);
+        $this->dbh->bind(':productQuantity', $this->quantity);
+        $this->dbh->bind(':name', $this->name);
+        $this->dbh->bind(':type', $this->type);
+        $this->dbh->bind(':image', $this->image);
+        $this->dbh->bind(':price', $this->price);
+        return $this->dbh->execute(); 
+    }
+     public function Remove()
+    {
+      $this->dbh->query("DELETE FROM `products` WHERE productID=:productid");
+        $this->dbh->bind(':productid', $this->productid);
         return $this->dbh->resultSet();
     }
-    public function productcount()
-    {
-        $this->product();
-        return $this->dbh->rowCount();
-    }
-    public function deleteproduct()
-    {
-        $this->dbh->query("DELETE productID FROM products WHERE productID =:productid");
-        $this->dbh->bind(':productid', $this->productid);    
-    }
-    public function Addcart($productid){
-        $this->dbh->query("INSERT INTO `cart`(`productID`, `userID`, `productQuantity`) VALUES ($productid,:userID,1)");
-        $this->dbh->bind(':userID', $_SESSION['userID']);
-        return $this->dbh->resultSet();
+    public function Edit(){
+    $this->dbh->query("UPDATE users SET name=:product_name,type=:product_type,price=:product_price,image=:product_image,size=:produuct_size where productID=:productID");
+    $this->dbh->bind(':productID', $_SESSION['productID']);
+    $this->dbh->bind(':name', $this->name);
+    $this->dbh->bind(':type', $this->type);
+    $this->dbh->bind(':price', $this->price);
+    $this->dbh->bind(':image', $this->image);
+    $this->dbh->bind(':size', $this->size);
+    return $this->dbh->execute();
     }
 }
+?>
