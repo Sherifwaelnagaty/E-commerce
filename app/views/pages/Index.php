@@ -18,14 +18,16 @@ class Index extends View
                            <div class="col-md-7 col-lg-6 ">
                               <div class="detail-box">
                                  <h1>
-                                    <span>
-                                    Sale 20% Off
-                                    </span>
+                                    Reels
+                                    For High Brands
                                     <br>
-                                    On Everything
                                  </h1>
                                  <p>
-                                    Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                                    Our web application are Selling high brands from whole over the world Enjoy our web application and for any information contact us on Instagram page or What'sapp.
+
+
+
+
                                  </p>
                                  <div class="btn-box">
                                     <a href=$products class="btn1">
@@ -43,20 +45,22 @@ class Index extends View
                            <div class="col-md-7 col-lg-6 ">
                               <div class="detail-box">
                                  <h1>
-                                    <span>
-                                    Sale 20% Off
-                                    </span>
+                                    Reels
+                                    For High Brands
                                     <br>
-                                    On Everything
                                  </h1>
                                  <p>
-                                    Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                                    Our web application are Selling high brands from whole over the world Enjoy our web application and for any information contact us on Instagram page or What'sapp.
+
+
+
+
                                  </p>
                                  <div class="btn-box">
-                                    <a href="" class="btn1">
+                                    <a href=$products class="btn1">
                                     Shop Now
                                     </a>
-                                 </div>
+                              </div>
                               </div>
                            </div>
                         </div>
@@ -68,17 +72,19 @@ class Index extends View
                            <div class="col-md-7 col-lg-6 ">
                               <div class="detail-box">
                                  <h1>
-                                    <span>
-                                    Sale 20% Off
-                                    </span>
+                                    Reels
+                                    For High Brands
                                     <br>
-                                    On Everything
                                  </h1>
                                  <p>
-                                    Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                                    Our web application are Selling high brands from whole over the world Enjoy our web application and for any information contact us on Instagram page or What'sapp.
+
+
+
+
                                  </p>
                                  <div class="btn-box">
-                                    <a href="" class="btn1">
+                                    <a href=$products class="btn1">
                                     Shop Now
                                     </a>
                                  </div>
@@ -99,7 +105,7 @@ class Index extends View
          </section>
          <!-- end slider section -->
       </div>
-EOT;
+      EOT;
     echo $text;
     require APPROOT . '/views/inc/footer.php';
   }
