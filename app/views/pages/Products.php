@@ -48,7 +48,6 @@ class Products extends View
                            </form>
                            <form action=$Details method="POST"><br>
                            <input type="submit" value="More Info">
-                           
                            </form>
                      </div>
                      </div>
@@ -69,30 +68,4 @@ class Products extends View
             EOT;
     echo $text;
     }
-   private function Delete($val)
-  {
-      $action=URLROOT.'Pages/products?id='.$val;
-      $text = <<<EOT
-      <td><a <?php echo "href='".URLROOT.'pages/products?id='.$x->productID."'";?> class='btn btn-danger'>Delete</a></td>
-      <td>
-      <a href=$action>X</a>
-      <div class="alert alert-danger text-center">Deleted Successfully</div>
-      </td>
-      EOT;
-      echo $text;
-  }
-  public function Edit(){
-        $action=URLROOT.'Pages/products?id='.$val;
-      $text = <<<EOT
-            <div class="row mt-3">
-                </div>
-                <div class="mt-5 text-center"><td><a <?php echo "href='".URLROOT.'pages/products?id='.$x->productID."'";?> >Edit</a></td>
-     
-    
-            </div>
-            </div>
-            EOT;
-            echo $text;
-    }
 }
-?>
