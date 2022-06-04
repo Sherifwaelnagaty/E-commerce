@@ -71,7 +71,7 @@ class Products_DetailedModel extends model
     }
     public function deleteproduct()
     {
-        $this->dbh->query("DELETE productID FROM products WHERE productID =:productid");
+        $this->dbh->query("DELETE FROM products WHERE productID =:productid");
         $this->dbh->bind(':productid', $this->productid);
         return $this->dbh->execute();    
     }
