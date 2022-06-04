@@ -139,10 +139,23 @@ class Pages extends Controller
     }
     public function Products_Detailed()
     {
+        $registerModel = $this->getModel();
+        if (isset($_POST['Delete'])){    
+            $registerModel->setproductid(trim($_GET['id']));            
+            if ($registerModel->deleteproduct()) {
+                    redirect('Index');
+                } else {
+                    die('Error in sign up');
+                }
+        }
+        if (isset($_POST['Add'])){              
+            if ($registerModel->Addcart($_GET['id'])) {
+                    redirect('pages/cart');
+                }
+        }
         $viewPath = VIEWS_PATH . 'pages/Products_Detailed.php';
         require_once $viewPath;
         $Products_DetailedView = new Products_Detailed($this->getModel(), $this);
         $Products_DetailedView->output();
     }
 }
-?>
