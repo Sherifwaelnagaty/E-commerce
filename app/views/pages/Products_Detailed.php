@@ -18,10 +18,11 @@ class Products_Detailed extends View
     $this->Image($row['product_image']);
     $this->Price($row['product_price']);    
     $this->Sizes();    
-    $this->AddToCart();
-    if($_SESSION['Type']=="Admin")
-    $this->Delete(); 
+    $this->AddToCart($row['productID']);
+    if($_SESSION['Type']=="Admin"){
+      $this->Delete($row['productID']);  
     }
+    }    
     require APPROOT . '/views/inc/footer.php';
   }
   private function Image($Image)
@@ -74,24 +75,26 @@ class Products_Detailed extends View
     EOT;
     echo $text2;
   }
-  private function AddToCart()
+  private function AddToCart($action)
   {
+    $action=URLROOT . 'pages/Products_Detailed?id='.$action;
     $text=<<<EOT
-            <div class="action">
+            <div class=$action>
             <br><br>
-            <input type="Submit" value="Add to Cart" class="add-to-cart btn btn-default">
+            <input type="Submit" value="Add to Cart" class="add-to-cart btn btn-default" name="Add">
             </div>
             
             </body>
         EOT;
     echo $text;    
   }
-  private function Delete()
+  private function Delete($action)
   {
+    $action=URLROOT . 'pages/Products_Detailed?id='.$action;
     $text=<<<EOT
-            <div class="action">
+            <div class=$action method="POST">
             <br><br>
-            <input type="Submit" value="    Delete      " class="add-to-cart btn btn-default">
+            <input type="Submit" value="    Delete      " class="add-to-cart btn btn-default" name="Delete">
             </div>
             </div>
             </div>
